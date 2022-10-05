@@ -3,6 +3,8 @@ create table managers (
 	"first" varchar(25),
 	"last" varchar(25),
 	email varchar(50),
+	username varchar(10),
+	pw varchar(20),
 	department varchar(25)
 );
 
@@ -11,6 +13,8 @@ create table employees(
 	"first" varchar(25),
 	"last" varchar(25),
 	email varchar(50),
+	username varchar(10),
+	pw varchar(20),
 	department varchar(25),
 	manager int references managers
 );
@@ -28,5 +32,7 @@ create table new_account(
 	"first" varchar(25),
 	"last" varchar(25),
 	email varchar(50),
+	username varchar(10),
+	pw varchar(20),
 	department varchar(25)
 );

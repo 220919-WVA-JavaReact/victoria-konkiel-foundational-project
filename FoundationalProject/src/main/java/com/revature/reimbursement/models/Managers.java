@@ -1,31 +1,29 @@
 package com.revature.reimbursement.models;
 
-public class Employees {
-    private int employ_id;
+public class Managers {
+    private int man_id;
     private String fname;
     private String lname;
     private String email;
     private String department;
-    private int manager;
 
-    public Employees(int employ_id, String fname, String lname, String email, String department, int manager) {
-        this.employ_id = employ_id;
+    public Managers(int man_id, String fname, String lname, String email, String department) {
+        this.man_id = man_id;
         this.fname = fname;
         this.lname = lname;
         this.email = email;
         this.department = department;
-        this.manager = manager;
     }
 
-    public Employees(int employ_id) {
-        this.employ_id = employ_id;
+    public Managers(int man_id) {
+        this.man_id = man_id;
     }
 
-    public Employees() {
+    public Managers() {
     }
 
-    public int getEmploy_id() {
-        return employ_id;
+    public int getMan_id() {
+        return man_id;
     }
 
     public String getFname() {
@@ -59,18 +57,4 @@ public class Employees {
     public void setDepartment(String department) {
         this.department = department;
     }
-
-    public int getManager() {
-        return manager;
-    }
-
-    public void setManager(int manager) {
-        this.manager = manager;
-        /*
-        have a conditional saying something like if department equals management to set manager, that way only managers
-        can change who is managing what employees
-         */
-    }
-
-    //construct overrides here once I figure out what I need to override
 }

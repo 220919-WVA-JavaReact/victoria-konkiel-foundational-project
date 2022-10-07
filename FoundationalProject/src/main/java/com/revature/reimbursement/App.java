@@ -45,6 +45,7 @@ public class App {
                         ms.register();
                         break;
                     case "quit" :
+                        System.out.println("Exiting program...");
                         programRunning = false;
                         break;
                     default:

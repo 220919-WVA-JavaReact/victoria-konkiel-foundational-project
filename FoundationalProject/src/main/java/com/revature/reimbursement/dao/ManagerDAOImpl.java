@@ -41,7 +41,7 @@ public class ManagerDAOImpl implements ManagerDAO {
     public Managers registerManager(String firstName, String lastName, String email, String username, String password, String department) {
         Managers manager = new Managers();
         try(Connection conn = ConnectionUtil.getConnection()) {
-            String sql = "insert into managers(first, last, email, username, password, department) values (?,?,?,?,?,?) returning *";
+            String sql = "insert into managers(first, last, email, username, pw, department) values (?,?,?,?,?,?) returning *";
             PreparedStatement prepState = conn.prepareStatement(sql);
             prepState.setString(1, firstName);
             prepState.setString(2, lastName);

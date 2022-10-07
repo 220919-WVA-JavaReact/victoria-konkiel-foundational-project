@@ -24,7 +24,7 @@ public class EmployeeService {
                 System.out.println("You have successfully logged in!");
             }
         }
-        return null;
+        return employee;
     }
 
     public Employees register() {

@@ -3,19 +3,19 @@ package com.revature.reimbursement.models;
 import java.util.Objects;
 
 public class ReimbursementTicket {
-    private int employ_id;
+    private Employees employee;
     private double amount;
     private String description;
     private String status;
 
-    public ReimbursementTicket(int employ_id, double amount, String description) {
-        this.employ_id = employ_id;
+    public ReimbursementTicket(Employees employee, double amount, String description) {
+        this.employee = employee;
         this.amount = amount;
         this.description = description;
     }
 
-    public ReimbursementTicket(int employ_id, double amount, String description, String status) {
-        this.employ_id = employ_id;
+    public ReimbursementTicket(Employees employee, double amount, String description, String status) {
+        this.employee = employee;
         this.amount = amount;
         this.description = description;
         this.status = status;
@@ -25,19 +25,19 @@ public class ReimbursementTicket {
         this.status = status;
     }
 
-    public ReimbursementTicket(int employ_id) {
-        this.employ_id = employ_id;
+    public ReimbursementTicket(Employees employee) {
+        this.employee = employee;
     }
 
     public ReimbursementTicket() {
     }
 
-    //public Employees getEmploy_id() {
-    //    return employee;
-    //}
+    public Employees getEmploy_id() {
+        return employee;
+    }
 
-    public void setEmploy_id(int employ_id) {
-        this.employ_id = employ_id;
+    public void setEmploy_id(Employees employee) {
+        this.employee = employee;
     }
 
     public double getAmount() {
@@ -67,7 +67,7 @@ public class ReimbursementTicket {
     @Override
     public String toString() {
         return "ReimbursementTicket{" +
-                "employ_id=" + employ_id +
+                "employee=" + employee +
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
                 ", status='" + status + '\'' +
@@ -79,11 +79,11 @@ public class ReimbursementTicket {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ReimbursementTicket that = (ReimbursementTicket) o;
-        return employ_id == that.employ_id && Double.compare(that.amount, amount) == 0 && description.equals(that.description) && status.equals(that.status);
+        return employee == that.employee && Double.compare(that.amount, amount) == 0 && description.equals(that.description) && status.equals(that.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(employ_id, amount, description, status);
+        return Objects.hash(employee, amount, description, status);
     }
 }

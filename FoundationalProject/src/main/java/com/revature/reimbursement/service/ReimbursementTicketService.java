@@ -12,20 +12,21 @@ public class ReimbursementTicketService {
 
     public void createTicket(Employees employee) {
         System.out.println("Let's see if we can get you some money back, yeah?");
-//        System.out.println("Please enter your employee id:");
-//        int employ_id = sc.nextInt();
         System.out.println("Please type in the amount you would like to be reimbursed for:");
         int amount = sc.nextInt();
         System.out.println("Please give us a description on what the expense was for:");
-        String description = sc.nextLine();
-        int employ_id = employee.getEmploy_id();
+        String description = sc.next();
 
-        ReimbursementTicket rt = new ReimbursementTicket(employ_id, amount, description);
-        boolean success = rtd.createTicket(employee, amount, description);
-        if (success) {
-            System.out.println("You've successfully submitted your ticket. Thank you!");
+        if (description == null ) {
+            System.out.println("The description must be filled out");
         } else {
-            System.out.println("Uh oh... Looks like something went wrong. Please try submitting your ticket again.");
+            ReimbursementTicket rt = new ReimbursementTicket(employee, amount, description);
+            boolean success = rtd.createTicket(employee, amount, description);
+            if (success) {
+                System.out.println("You've successfully submitted your ticket. Thank you!");
+            } else {
+                System.out.println("Uh oh... Looks like something went wrong. Please try submitting your ticket again.");
+            }
         }
     }
 }

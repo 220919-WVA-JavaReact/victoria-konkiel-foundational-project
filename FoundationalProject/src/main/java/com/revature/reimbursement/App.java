@@ -33,7 +33,7 @@ public class App {
 
                 switch(response) {
                     case "employee login" :
-                        es.login();
+                        loggedIn = es.login();
 
                         System.out.println("Ready to create a reimbursement ticket?");
                         System.out.println(" - To create a ticket type 'create'");

@@ -17,7 +17,7 @@ public class ReimbursementTicketService {
         System.out.println("Please give us a description on what the expense was for:");
         String description = sc.next();
 
-        if (description == null ) {
+        if (description.equals(null)) {
             System.out.println("The description must be filled out");
         } else {
             ReimbursementTicket rt = new ReimbursementTicket(employee, amount, description);

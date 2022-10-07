@@ -56,7 +56,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             ResultSet rs;
             if((rs = prepState.executeQuery()) != null) {
                 rs.next();
-                //int receivedEmployeeId = rs.getInt("employ_id");
                 String receivedFirstName = rs.getString("first");
                 String receivedLastName = rs.getString("last");
                 String receivedEmail = rs.getString("email");

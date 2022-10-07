@@ -34,15 +34,37 @@ public class App {
                 switch(response) {
                     case "employee login" :
                         es.login();
+
+                        System.out.println("Ready to create a reimbursement ticket?");
+                        System.out.println(" - To create a ticket type 'create'");
+                        System.out.println(" - To go back to the previous menu type 'back'");
+                        System.out.println(" - To quit type 'quit'");
+                        String ticketResponse = sc.nextLine();
+
+                        switch (ticketResponse) {
+                            case "create" :
+                                rts.createTicket(loggedIn);
+                                break;
+                            case "back" :
+                                break;
+                            case "quit" :
+                                programRunning = false;
+                                break;
+                            default :
+                                System.out.println("Sorry, I did not understand that. Please try again.");
+                        }
+
                         break;
                     case "manager login" :
                         ms.login();
                         break;
                     case "register employee" :
                         es.register();
+                        System.out.println("Congrats, you've created an employee account");
                         break;
                     case "register manager" :
                         ms.register();
+                        System.out.println("Congrats! You've created a manager account!");
                         break;
                     case "quit" :
                         System.out.println("Exiting program...");
@@ -50,22 +72,6 @@ public class App {
                         break;
                     default:
                         System.out.println("Sorry, something went wrong. Please try again.");
-                }
-            } else {
-                System.out.println("Ready to create a reimbursement ticket?");
-                System.out.println(" - To create a ticket type 'create'");
-                System.out.println(" - To quit type 'quit'");
-                String ticketResponse = sc.nextLine();
-
-                switch (ticketResponse) {
-                    case "create" :
-                        rts.createTicket(loggedIn);
-                        break;
-                    case "quit" :
-                        programRunning = false;
-                        break;
-                    default :
-                        System.out.println("Sorry, I did not understand that. Please try again.");
                 }
             }
         }

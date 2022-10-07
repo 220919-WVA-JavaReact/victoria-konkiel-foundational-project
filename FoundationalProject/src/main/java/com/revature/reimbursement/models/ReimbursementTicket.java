@@ -32,9 +32,9 @@ public class ReimbursementTicket {
     public ReimbursementTicket() {
     }
 
-    public int getEmploy_id() {
-        return employ_id;
-    }
+    //public Employees getEmploy_id() {
+    //    return employee;
+    //}
 
     public void setEmploy_id(int employ_id) {
         this.employ_id = employ_id;

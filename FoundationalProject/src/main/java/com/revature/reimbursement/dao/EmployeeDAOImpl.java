@@ -44,7 +44,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         Employees employee = new Employees();
 
         try (Connection conn = ConnectionUtil.getConnection()) {
-            String sql = "insert into employees (first, last, email, username, pw, department, manager) values (?,?,?,?,?,?) returning *";
+            String sql = "insert into employees (first, last, email, username, pw, department) values (?,?,?,?,?,?) returning *";
             PreparedStatement prepState = conn.prepareStatement(sql);
             prepState.setString(1, firstName);
             prepState.setString(2, lastName);
@@ -56,7 +56,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             ResultSet rs;
             if((rs = prepState.executeQuery()) != null) {
                 rs.next();
-                int receivedEmployeeId = rs.getInt("employ_id");
+                //int receivedEmployeeId = rs.getInt("employ_id");
                 String receivedFirstName = rs.getString("first");
                 String receivedLastName = rs.getString("last");
                 String receivedEmail = rs.getString("email");
@@ -64,7 +64,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
                 String receivedPassword = rs.getString("pw");
                 String receivedDepartment = rs.getString("department");
 
-                employee = new Employees(receivedEmployeeId, receivedFirstName, receivedLastName, receivedEmail, receivedUsername, receivedPassword, receivedDepartment);
+                employee = new Employees( receivedFirstName, receivedLastName, receivedEmail, receivedUsername, receivedPassword, receivedDepartment);
             }
         } catch (SQLException e) {
             System.out.println("Sorry, we are unable to register your user at this time...");

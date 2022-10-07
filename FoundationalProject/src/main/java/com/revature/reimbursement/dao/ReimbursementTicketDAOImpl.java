@@ -11,12 +11,11 @@ public class ReimbursementTicketDAOImpl implements ReimbursementTicketDAO {
     @Override
     public boolean createTicket(Employees employees, int amount, String description) {
         try (Connection conn = ConnectionUtil.getConnection()) {
-            String sql = "insert into rem_ticket(employ_id, man_id, amount, description, status) values (?,?,?,?,'pending')";
+            String sql = "insert into rem_ticket(employ_id, amount, description, status) values (?,?,?,'pending')";
             PreparedStatement prepState = conn.prepareStatement(sql);
             prepState.setInt(1, employees.getEmploy_id());
-            prepState.setObject(2, employees.getManager());
-            prepState.setInt(3, amount);
-            prepState.setString(4, description);
+            prepState.setInt(2, amount);
+            prepState.setString(3, description);
 
             int result = prepState.executeUpdate();
             if (result == 1) {

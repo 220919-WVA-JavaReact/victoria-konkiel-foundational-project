@@ -11,9 +11,8 @@ public class Employees {
     private String username;
     private String password;
     private String department;
-    private Managers manager;
 
-    public Employees(int employ_id, String fname, String lname, String email, String username, String password, String department, Managers manager) {
+    public Employees(int employ_id, String fname, String lname, String email, String username, String password, String department) {
         this.employ_id = employ_id;
         this.fname = fname;
         this.lname = lname;
@@ -21,17 +20,15 @@ public class Employees {
         this.username = username;
         this.password = password;
         this.department = department;
-        this.manager = manager;
     }
 
-    public Employees(String fname, String lname, String email, String username, String password, String department, Managers manager) {
+    public Employees(String fname, String lname, String email, String username, String password, String department) {
         this.fname = fname;
         this.lname = lname;
         this.email = email;
         this.username = username;
         this.password = password;
         this.department = department;
-        this.manager = manager;
     }
 
     public Employees() {
@@ -93,17 +90,6 @@ public class Employees {
         this.department = department;
     }
 
-    public Managers getManager() {
-        return manager;
-    }
-
-    public void setManager(Managers manager) {
-        this.manager = manager;
-        /*
-        have a conditional saying something like if department equals management to set manager, that way only managers
-        can change who is managing what employees
-         */
-    }
 
     //construct overrides here once I figure out what I need to override
 
@@ -117,7 +103,6 @@ public class Employees {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", department='" + department + '\'' +
-                ", manager=" + manager +
                 '}';
     }
 
@@ -126,11 +111,11 @@ public class Employees {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employees employees = (Employees) o;
-        return employ_id == employees.employ_id && manager == employees.manager && fname.equals(employees.fname) && lname.equals(employees.lname) && email.equals(employees.email) && username.equals(employees.username) && password.equals(employees.password) && department.equals(employees.department);
+        return employ_id == employees.employ_id && fname.equals(employees.fname) && lname.equals(employees.lname) && email.equals(employees.email) && username.equals(employees.username) && password.equals(employees.password) && department.equals(employees.department);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(employ_id, fname, lname, email, username, password, department, manager);
+        return Objects.hash(employ_id, fname, lname, email, username, password, department);
     }
 }

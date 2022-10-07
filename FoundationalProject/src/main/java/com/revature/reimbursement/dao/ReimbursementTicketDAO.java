@@ -5,5 +5,6 @@ import com.revature.reimbursement.models.ReimbursementTicket;
 
 public interface ReimbursementTicketDAO {
     //basic requirements for Reimbursement ticket
-   boolean createTicket(Employees employees, int amount, String description);
+    boolean createTicket(Employees employee, int amount, String description);
+
 }

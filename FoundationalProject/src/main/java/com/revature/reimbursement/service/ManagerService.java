@@ -1,33 +1,35 @@
 package com.revature.reimbursement.service;
 
-import com.revature.reimbursement.dao.EmployeeDAO;
-import com.revature.reimbursement.dao.EmployeeDAOImpl;
-import com.revature.reimbursement.models.Employees;
+import com.revature.reimbursement.dao.ManagerDAO;
+import com.revature.reimbursement.dao.ManagerDAOImpl;
+import com.revature.reimbursement.models.Managers;
+
 import java.util.Scanner;
 
-public class EmployeeService {
-    static EmployeeDAO ed = new EmployeeDAOImpl();
+public class ManagerService {
     Scanner sc = new Scanner(System.in);
+    static ManagerDAO  md = new ManagerDAOImpl();
 
-    public Employees login() {
+    public Managers login() {
         System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
         System.out.println("Please enter your username below:");
         String username = sc.nextLine();
         System.out.println("Please enter your password below:");
         String password = sc.nextLine();
 
-        Employees employee = ed.employeeLogin(username);
-        if (employee.getEmploy_id() == 0) {
-            System.out.println("I'm sorry, there is no user by that username.");
+        Managers manager = md.managerLogin(username);
+        if (manager.getMan_id() == 0) {
+            System.out.println("Sorry, there was no user associated with this username. Please try again.");
         } else {
-            if (employee.getPassword().equals(password)) {
-                System.out.println("You have successfully logged in!");
+            if(manager.getPassword().equals(password)) {
+                System.out.println("Congrats, you have successfully logged in!");
+                return manager;
             }
         }
         return null;
     }
 
-    public Employees register() {
+    public Managers register() {
         System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
         System.out.println("Let's get you an account!");
         System.out.println("Please enter your first name:");
@@ -43,11 +45,11 @@ public class EmployeeService {
         System.out.println("Please enter your department:");
         String department = sc.nextLine();
 
-        Employees employee = ed.registerEmployee(firstName, lastName, email, username, password,department);
-        if(employee.getEmploy_id() != 0) {
-            System.out.println("You have successfully registered! Congrats!");
+        Managers manager = md.registerManager(firstName, lastName, email, username, password, department);
+        if(manager.getMan_id() != 0) {
+            System.out.println("Congrats, you've successfully registered your manager account!");
+            return manager;
         }
         return null;
     }
-
 }

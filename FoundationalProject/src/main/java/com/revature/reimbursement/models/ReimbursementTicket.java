@@ -4,14 +4,18 @@ import java.util.Objects;
 
 public class ReimbursementTicket {
     private int employ_id;
-    private int man_id;
     private double amount;
     private String description;
     private String status;
 
-    public ReimbursementTicket(int employ_id, int man_id, double amount, String description, String status) {
+    public ReimbursementTicket(int employ_id, double amount, String description) {
         this.employ_id = employ_id;
-        this.man_id = man_id;
+        this.amount = amount;
+        this.description = description;
+    }
+
+    public ReimbursementTicket(int employ_id, double amount, String description, String status) {
+        this.employ_id = employ_id;
         this.amount = amount;
         this.description = description;
         this.status = status;
@@ -34,14 +38,6 @@ public class ReimbursementTicket {
 
     public void setEmploy_id(int employ_id) {
         this.employ_id = employ_id;
-    }
-
-    public int getMan_id() {
-        return man_id;
-    }
-
-    public void setMan_id(int man_id) {
-        this.man_id = man_id;
     }
 
     public double getAmount() {
@@ -72,7 +68,6 @@ public class ReimbursementTicket {
     public String toString() {
         return "ReimbursementTicket{" +
                 "employ_id=" + employ_id +
-                ", man_id=" + man_id +
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
                 ", status='" + status + '\'' +
@@ -84,11 +79,11 @@ public class ReimbursementTicket {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ReimbursementTicket that = (ReimbursementTicket) o;
-        return employ_id == that.employ_id && man_id == that.man_id && Double.compare(that.amount, amount) == 0 && description.equals(that.description) && status.equals(that.status);
+        return employ_id == that.employ_id && Double.compare(that.amount, amount) == 0 && description.equals(that.description) && status.equals(that.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(employ_id, man_id, amount, description, status);
+        return Objects.hash(employ_id, amount, description, status);
     }
 }

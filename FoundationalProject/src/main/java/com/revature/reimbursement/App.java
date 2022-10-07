@@ -44,8 +44,10 @@ public class App {
                         switch (ticketResponse) {
                             case "create" :
                                 rts.createTicket(loggedIn);
+                                loggedIn = null;
                                 break;
                             case "back" :
+                                loggedIn = null;
                                 break;
                             case "quit" :
                                 programRunning = false;
@@ -57,6 +59,7 @@ public class App {
                         break;
                     case "manager login" :
                         ms.login();
+                        System.out.println("You've successfully logged in");
                         break;
                     case "register employee" :
                         es.register();

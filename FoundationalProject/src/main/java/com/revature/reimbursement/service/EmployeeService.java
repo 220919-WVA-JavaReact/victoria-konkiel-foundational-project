@@ -2,17 +2,24 @@ package com.revature.reimbursement.service;
 
 import com.revature.reimbursement.dao.EmployeeDAO;
 import com.revature.reimbursement.dao.EmployeeDAOImpl;
+import com.revature.reimbursement.dao.UserAuthorizationDAO;
+import com.revature.reimbursement.dao.UserAuthorizationDAOImpl;
 import com.revature.reimbursement.models.Employees;
 import java.util.Scanner;
 
 public class EmployeeService {
     static EmployeeDAO ed = new EmployeeDAOImpl();
+    static UserAuthorizationDAO uad = new UserAuthorizationDAOImpl();
     Scanner sc = new Scanner(System.in);
 
     public Employees login() {
         System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
         System.out.println("Please enter your username below:");
         String username = sc.nextLine();
+        boolean takenUsername = uad.isUsernameTaken(username);
+        while(takenUsername) {
+            System.out.println("Sorry that username is taken... Please try again.");
+        }
         System.out.println("Please enter your password below:");
         String password = sc.nextLine();
 
@@ -38,6 +45,7 @@ public class EmployeeService {
         String email = sc.nextLine();
         System.out.println("Please enter your the username: (minimum of 10 characters)");
         String username = sc.nextLine();
+
         System.out.println("Please enter your password:");
         String password = sc.nextLine();
         System.out.println("Please enter your department:");

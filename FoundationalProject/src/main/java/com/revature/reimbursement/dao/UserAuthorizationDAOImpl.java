@@ -4,7 +4,7 @@ import com.revature.reimbursement.util.ConnectionUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-//import java.sql.ResultSet;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserAuthorizationDAOImpl implements UserAuthorizationDAO {
@@ -14,14 +14,16 @@ public class UserAuthorizationDAOImpl implements UserAuthorizationDAO {
         //Employees employee = new Employees();
         boolean result = true;
 
-
         try(Connection conn = ConnectionUtil.getConnection()) {
-            String sql = "select * from employees where username = ?";
+            String sql = "select count(*) from employees where username = ?";
             PreparedStatement prepState = conn.prepareStatement(sql);
             prepState.setString(1, username);
 
-            //ResultSet rs;
-            if ((prepState.executeQuery()) == null) {
+            ResultSet rs;
+            rs = prepState.executeQuery();
+            rs.next();
+            System.out.println(rs.getInt("count"));
+            if (rs.getInt("count") == 0) {
                 result = false;
             }
         } catch (SQLException e) {

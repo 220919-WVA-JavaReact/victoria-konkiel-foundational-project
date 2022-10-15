@@ -16,10 +16,6 @@ public class EmployeeService {
         System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
         System.out.println("Please enter your username below:");
         String username = sc.nextLine();
-        boolean takenUsername = uad.isUsernameTaken(username);
-        while(takenUsername) {
-            System.out.println("Sorry that username is taken... Please try again.");
-        }
         System.out.println("Please enter your password below:");
         String password = sc.nextLine();
 
@@ -45,7 +41,13 @@ public class EmployeeService {
         String email = sc.nextLine();
         System.out.println("Please enter your the username: (minimum of 10 characters)");
         String username = sc.nextLine();
-
+        boolean takenUsername = uad.isUsernameTaken(username);
+        while(takenUsername) {
+            System.out.println("Sorry that username is taken... Please try again.");
+            System.out.println("Please enter your username below:");
+            username = sc.nextLine();
+            uad.isUsernameTaken(username);
+        }
         System.out.println("Please enter your password:");
         String password = sc.nextLine();
         System.out.println("Please enter your department:");

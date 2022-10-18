@@ -14,6 +14,7 @@ public class TestServlet extends HttpServlet {
         System.out.println("[LOG] - Request URI: " + req.getRequestURI());
         System.out.println("[LOG] - Request Method: " + req.getMethod());
         System.out.println("[LOG] - Request Header, example " + req.getHeader("example"));
+        System.out.println("[LOG] - Request Query String: " + req.getQueryString());
 
         resp.setStatus(200);
         resp.setHeader("Content-type", "text/plain");

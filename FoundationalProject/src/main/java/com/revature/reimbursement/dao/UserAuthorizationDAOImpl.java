@@ -23,7 +23,7 @@ public class UserAuthorizationDAOImpl implements UserAuthorizationDAO {
             rs = prepState.executeQuery();
             rs.next();
             System.out.println(rs.getInt("count"));
-            if (rs.getInt("count") == 0) {
+            if ((rs.getInt("count")) == 0) {
                 result = false;
             }
         } catch (SQLException e) {

@@ -15,5 +15,7 @@
 /Users/victoriakonkiel/dev/revature-workspace/victoria-konkiel-foundational-project/FoundationalProject/src/main/java/com/revature/reimbursement/service/EmployeeService.java
 /Users/victoriakonkiel/dev/revature-workspace/victoria-konkiel-foundational-project/FoundationalProject/src/main/java/com/revature/reimbursement/util/ConnectionUtil.java
 /Users/victoriakonkiel/dev/revature-workspace/victoria-konkiel-foundational-project/FoundationalProject/src/main/java/com/revature/reimbursement/dao/EmployeeDAOImpl.java
+/Users/victoriakonkiel/dev/revature-workspace/victoria-konkiel-foundational-project/FoundationalProject/src/main/java/com/revature/reimbursement/servlets/ManagerServlet.java
 /Users/victoriakonkiel/dev/revature-workspace/victoria-konkiel-foundational-project/FoundationalProject/src/main/java/com/revature/reimbursement/models/ReimbursementTicket.java
+/Users/victoriakonkiel/dev/revature-workspace/victoria-konkiel-foundational-project/FoundationalProject/src/main/java/com/revature/reimbursement/util/ContextLoaderListener.java
 /Users/victoriakonkiel/dev/revature-workspace/victoria-konkiel-foundational-project/FoundationalProject/src/main/java/com/revature/Main.java

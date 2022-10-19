@@ -8,12 +8,14 @@ com/revature/reimbursement/util/ConnectionUtil.class
 com/revature/reimbursement/dao/EmployeeDAO.class
 com/revature/reimbursement/App.class
 com/revature/reimbursement/dao/ReimbursementTicketDAO.class
+com/revature/reimbursement/util/ContextLoaderListener.class
 com/revature/reimbursement/dao/UserAuthorizationDAO.class
 com/revature/reimbursement/servlets/TestServlet.class
 com/revature/reimbursement/dao/UserAuthorizationDAOImpl.class
 com/revature/reimbursement/dao/ManagerDAO.class
 com/revature/reimbursement/dao/ManagerDAOImpl.class
 com/revature/Main.class
+com/revature/reimbursement/servlets/ManagerServlet.class
 com/revature/reimbursement/models/Employees.class
 com/revature/reimbursement/service/ManagerService.class
 com/revature/reimbursement/models/ReimbursementTicket.class

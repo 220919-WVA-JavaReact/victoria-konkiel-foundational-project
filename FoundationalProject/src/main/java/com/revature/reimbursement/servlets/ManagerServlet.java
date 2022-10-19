@@ -1,39 +1,39 @@
 package com.revature.reimbursement.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.reimbursement.models.Employees;
-
+import com.revature.reimbursement.models.Managers;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 
-public class EmployeeServlet extends HttpServlet {
-    private final ObjectMapper mapper;
-
-    public EmployeeServlet(ObjectMapper mapper) {
-        this.mapper = mapper;
-    }
+@WebServlet(
+        urlPatterns = "/manager",
+        loadOnStartup = 2,
+        initParams = {
+                @WebInitParam(name = "manager-servlet-key", value = "manager-servlet-value"),
+                @WebInitParam(name = "another-param", value = "another-value")
+        })
+public class ManagerServlet extends HttpServlet {
+    private final ObjectMapper mapper = new ObjectMapper();
 
     @Override
     public void init() throws ServletException {
-        System.out.println("[LOG] - EmployeeServlet Instantiated");
-        System.out.println("[LOG] - Init param employee-servlet-key: " + this.getServletConfig().getInitParameter("employee-servlet-key"));
+        System.out.println("[LOG] - ManagerServlet Instantiated");
+        System.out.println("[LOG] - Init param manager-servlet-key: " + this.getServletConfig().getInitParameter("manager-servlet-key"));
         System.out.println("[LOG] - Init param test-init-key: " + this.getServletConfig().getInitParameter("test-init-key"));
         System.out.println("[LOG] - Context param test-init-key: " + this.getServletContext().getInitParameter("test-context-key"));
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("[LOG] - EmployeeServlet received a GET request at " + LocalDateTime.now());
-        Employees newEmployee = new Employees("Ron", "Swanson", "ronswan@pnr.com", "ronswan1", "pass1234", "Parks and Recreation");
-        String respPayload = mapper.writeValueAsString(newEmployee);
+        System.out.println("[LOG] - ManagerServlet received a GET request at " + LocalDateTime.now());
+        Managers newManager = new Managers("Ben", "Wyatt", "bwyatt@pnr.com", "bwyatt", "Password156", "Parks and Recreation");
+        String respPayload = mapper.writeValueAsString(newManager);
 
         resp.setStatus(200);
         resp.setContentType("application/json");
@@ -42,10 +42,10 @@ public class EmployeeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("[LOG] - EmployeeServlet received a POST request at " + LocalDateTime.now());
+        System.out.println("[LOG] - ManagerServlet received a POST request at " + LocalDateTime.now());
 
-        Employees newEmployee = mapper.readValue(req.getInputStream(), Employees.class);
-        System.out.println(newEmployee);
+        Managers newManager = mapper.readValue(req.getInputStream(), Managers.class);
+        System.out.println(newManager);
 
         resp.setStatus(204);
     }

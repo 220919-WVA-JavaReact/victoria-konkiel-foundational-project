@@ -13,6 +13,7 @@ com/revature/reimbursement/dao/UserAuthorizationDAO.class
 com/revature/reimbursement/servlets/TestServlet.class
 com/revature/reimbursement/dao/UserAuthorizationDAOImpl.class
 com/revature/reimbursement/dao/ManagerDAO.class
+com/revature/reimbursement/servlets/LoginServlet.class
 com/revature/reimbursement/dao/ManagerDAOImpl.class
 com/revature/Main.class
 com/revature/reimbursement/servlets/ManagerServlet.class

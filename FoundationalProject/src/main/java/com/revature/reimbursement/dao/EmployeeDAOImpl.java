@@ -15,26 +15,29 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
         //Establish connection with database
         try(Connection conn = ConnectionUtil.getConnection()) {
-            String sql = "select * from employees where username = ?";
+            String sql = "SELECT * FROM employees WHERE username = ?";
             PreparedStatement prepState = conn.prepareStatement(sql);
             prepState.setString(1, username);
 
             ResultSet rs;
             if((rs = prepState.executeQuery()) != null) {
-                rs.next();
-                int receivedEmployeeId = rs.getInt("employee_id");
-                String receivedFirstName = rs.getString("first");
-                String receivedLastName = rs.getString("last");
-                String receivedEmail = rs.getString("email");
-                String receivedUsername = rs.getString("username");
-                String receivedPassword = rs.getString("pw");
-                String receivedDepartment = rs.getString("department");
+                if (rs.next()) {
 
-                employee = new Employees(receivedEmployeeId, receivedFirstName, receivedLastName, receivedEmail, receivedUsername, receivedPassword, receivedDepartment);
+                    int receivedEmployeeId = rs.getInt("employee_id");
+                    String receivedFirstName = rs.getString("first");
+                    String receivedLastName = rs.getString("last");
+                    String receivedEmail = rs.getString("email");
+                    String receivedUsername = rs.getString("username");
+                    String receivedPassword = rs.getString("pw");
+                    String receivedDepartment = rs.getString("department");
+
+                    employee = new Employees(receivedEmployeeId, receivedFirstName, receivedLastName, receivedEmail, receivedUsername, receivedPassword, receivedDepartment);
+                }
             }
         } catch(SQLException e) {
             System.out.println("Sorry, we are unable to retrieve your account at this time...");
             e.printStackTrace();
+            return null;
         }
         return employee;
     }

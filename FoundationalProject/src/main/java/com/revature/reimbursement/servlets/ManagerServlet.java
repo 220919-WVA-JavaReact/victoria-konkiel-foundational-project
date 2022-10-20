@@ -11,15 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-@WebServlet(
-        urlPatterns = "/manager",
-        loadOnStartup = 2,
-        initParams = {
-                @WebInitParam(name = "manager-servlet-key", value = "manager-servlet-value"),
-                @WebInitParam(name = "another-param", value = "another-value")
-        })
+//@WebServlet(
+//        urlPatterns = "/manager",
+//        loadOnStartup = 2,
+//        initParams = {
+//                @WebInitParam(name = "manager-servlet-key", value = "manager-servlet-value"),
+//                @WebInitParam(name = "another-param", value = "another-value")
+//        })
 public class ManagerServlet extends HttpServlet {
-    private final ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper mapper;
+    public ManagerServlet(ObjectMapper mapper) {
+        this.mapper = mapper;
+    }
 
     @Override
     public void init() throws ServletException {

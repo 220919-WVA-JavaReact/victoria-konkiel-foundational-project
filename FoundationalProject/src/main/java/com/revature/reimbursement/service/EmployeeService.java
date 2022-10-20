@@ -30,6 +30,16 @@ public class EmployeeService {
         return employee;
     }
 
+    public Employees login(String username, String password) {
+        Employees employee = ed.employeeLogin(username);
+        if (password.equals(employee.getPassword())) {
+            return employee;
+        } else {
+            return null;
+        }
+    }
+
+
     public Employees register() {
         System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
         System.out.println("Let's get you an account!");

@@ -31,6 +31,11 @@ public class Employees {
         this.department = department;
     }
 
+    public Employees(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public Employees() {
     }
 

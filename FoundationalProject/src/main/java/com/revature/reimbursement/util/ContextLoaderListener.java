@@ -1,14 +1,9 @@
 package com.revature.reimbursement.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.reimbursement.servlets.EmployeeServlet;
-import com.revature.reimbursement.servlets.LoginServlet;
-import com.revature.reimbursement.servlets.ManagerServlet;
+import com.revature.reimbursement.servlets.*;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-import javax.servlet.ServletRegistration;
+import javax.servlet.*;
 import java.time.LocalDateTime;
 
 public class ContextLoaderListener implements ServletContextListener {
@@ -20,6 +15,8 @@ public class ContextLoaderListener implements ServletContextListener {
         EmployeeServlet employeeServlet = new EmployeeServlet(mapper);
         ManagerServlet managerServlet = new ManagerServlet(mapper);
         LoginServlet loginServlet = new LoginServlet(mapper);
+        RegistrationServlet registrationServlet = new RegistrationServlet(mapper);
+        ReimbursementServlet reimbursementServlet = new ReimbursementServlet(mapper);
 
         ServletContext context = sce.getServletContext();
 
@@ -40,6 +37,18 @@ public class ContextLoaderListener implements ServletContextListener {
         registeredServlet2.setLoadOnStartup(3);
         registeredServlet2.setInitParameter("manager-servlet-key", "manager-servlet-value");
         registeredServlet2.setInitParameter("another-param", "another-value");
+
+        ServletRegistration.Dynamic registeredServlet4 = context.addServlet("RegistrationServlet", registrationServlet);
+        registeredServlet4.addMapping("/registration");
+        registeredServlet4.setLoadOnStartup(4);
+        registeredServlet4.setInitParameter("registration-servlet-key", "registration-servlet-value");
+        registeredServlet4.setInitParameter("another-param", "another-value");
+
+        ServletRegistration.Dynamic registeredServlet5 = context.addServlet("ReimbursementServlet", reimbursementServlet);
+        registeredServlet5.addMapping("/reimbursement");
+        registeredServlet5.setLoadOnStartup(5);
+        registeredServlet5.setInitParameter("reimbursement-servlet-key", "reimbursement-servlet-value");
+        registeredServlet5.setInitParameter("another-param", "another-value");
     }
 
     @Override

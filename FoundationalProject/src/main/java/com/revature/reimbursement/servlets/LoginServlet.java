@@ -37,12 +37,13 @@ public class LoginServlet extends HttpServlet {
             String providedPassword = (String) employeeSearch.get("pw");
 
             Employees employee = employeeService.login(providedUsername, providedPassword);
-            String payload = mapper.writeValueAsString(employee);
+            //String payload = mapper.writeValueAsString(employee);
 
-            if (payload.equals("null")) {
+            if (employee == null) {
                 resp.setStatus(400);
                 resp.getWriter().write("Invalid credentials");
             } else {
+                String payload = mapper.writeValueAsString(employee);
                 resp.getWriter().write(payload);
                 HttpSession session = req.getSession();
                 session.setAttribute("employee-logged-in", employee);
@@ -52,6 +53,8 @@ public class LoginServlet extends HttpServlet {
 
             String providedUsername = (String) managerSearch.get("username");
             String providedPassword = (String) managerSearch.get("pw");
+            System.out.println(providedUsername);
+            System.out.println(providedPassword);
 
             Managers manager = managerService.login(providedUsername, providedPassword);
             String payload = mapper.writeValueAsString(manager);

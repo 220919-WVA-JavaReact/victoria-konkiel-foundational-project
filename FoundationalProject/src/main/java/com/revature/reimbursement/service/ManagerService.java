@@ -27,11 +27,14 @@ public class ManagerService {
                 return manager;
             }
         }
-        return null;
+        return manager;
     }
 
     public Managers login(String username, String password) {
+        System.out.println(username);
+        System.out.println(password);
         Managers manager = md.managerLogin(username);
+        System.out.println(manager);
         if (password.equals(manager.getPassword())) {
             return manager;
         } else {

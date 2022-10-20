@@ -5,6 +5,7 @@
 /Users/victoriakonkiel/dev/revature-workspace/victoria-konkiel-foundational-project/FoundationalProject/src/main/java/com/revature/reimbursement/dao/ReimbursementTicketDAOImpl.java
 /Users/victoriakonkiel/dev/revature-workspace/victoria-konkiel-foundational-project/FoundationalProject/src/main/java/com/revature/reimbursement/dao/UserAuthorizationDAO.java
 /Users/victoriakonkiel/dev/revature-workspace/victoria-konkiel-foundational-project/FoundationalProject/src/main/java/com/revature/reimbursement/dao/ManagerDAOImpl.java
+/Users/victoriakonkiel/dev/revature-workspace/victoria-konkiel-foundational-project/FoundationalProject/src/main/java/com/revature/reimbursement/servlets/RegistrationServlet.java
 /Users/victoriakonkiel/dev/revature-workspace/victoria-konkiel-foundational-project/FoundationalProject/src/main/java/com/revature/reimbursement/servlets/LoginServlet.java
 /Users/victoriakonkiel/dev/revature-workspace/victoria-konkiel-foundational-project/FoundationalProject/src/main/java/com/revature/reimbursement/dao/EmployeeDAO.java
 /Users/victoriakonkiel/dev/revature-workspace/victoria-konkiel-foundational-project/FoundationalProject/src/main/java/com/revature/reimbursement/models/Employees.java

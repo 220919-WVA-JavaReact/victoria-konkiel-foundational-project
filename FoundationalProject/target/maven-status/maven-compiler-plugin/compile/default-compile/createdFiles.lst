@@ -1,3 +1,4 @@
+com/revature/reimbursement/servlets/RegistrationServlet.class
 com/revature/reimbursement/dao/EmployeeDAOImpl.class
 com/revature/reimbursement/servlets/EmployeeServlet.class
 com/revature/reimbursement/service/EmployeeService.class

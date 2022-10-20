@@ -8,10 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ManagerDAOImpl implements ManagerDAO {
-    Managers manager = new Managers();
-
     @Override
     public Managers managerLogin(String username) {
+        Managers manager = new Managers();
+
         try(Connection conn = ConnectionUtil.getConnection()) {
             String sql = "select * from managers where username = ?";
             PreparedStatement prepState = conn.prepareStatement(sql);
@@ -19,20 +19,22 @@ public class ManagerDAOImpl implements ManagerDAO {
 
             ResultSet rs;
             if((rs = prepState.executeQuery()) != null) {
-                rs.next();
-                int receivedManId = rs.getInt("man_id");
-                String receivedFirstName = rs.getString("first");
-                String receivedLastName = rs.getString("last");
-                String receivedEmail = rs.getString("email");
-                String receivedUsername = rs.getString("username");
-                String receivedPassword = rs.getString("pw");
-                String receivedDepartment = rs.getString("department");
+                if (rs.next()) {
+                    int receivedManId = rs.getInt("man_id");
+                    String receivedFirstName = rs.getString("first");
+                    String receivedLastName = rs.getString("last");
+                    String receivedEmail = rs.getString("email");
+                    String receivedUsername = rs.getString("username");
+                    String receivedPassword = rs.getString("pw");
+                    String receivedDepartment = rs.getString("department");
 
-                manager = new Managers(receivedManId, receivedFirstName, receivedLastName, receivedEmail, receivedUsername, receivedPassword, receivedDepartment);
+                    manager = new Managers(receivedManId, receivedFirstName, receivedLastName, receivedEmail, receivedUsername, receivedPassword, receivedDepartment);
+                }
             }
         } catch(SQLException e) {
             System.out.println("There seems to be an issue retrieving your account...");
             e.printStackTrace();
+            return null;
         }
         return manager;
     }

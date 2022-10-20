@@ -3,6 +3,7 @@ package com.revature.reimbursement.models;
 import java.util.Objects;
 
 public class ReimbursementTicket {
+    private int employee_id;
     private Employees employee;
     private double amount;
     private String description;
@@ -32,7 +33,11 @@ public class ReimbursementTicket {
     public ReimbursementTicket() {
     }
 
-    public ReimbursementTicket(int receivedEmployee, double receivedAmount, String receivedDescription, String receivedStatus) {
+    public ReimbursementTicket(int employee_id, double amount, String description, String status) {
+        this.employee_id = employee_id;
+        this.amount = amount;
+        this.description = description;
+        this.status = status;
     }
 
     public Employees getEmploy_id() {

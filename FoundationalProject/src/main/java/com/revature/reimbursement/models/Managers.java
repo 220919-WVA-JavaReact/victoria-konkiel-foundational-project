@@ -33,6 +33,11 @@ public class Managers {
     public Managers() {
     }
 
+    public Managers(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public int getMan_id() {
         return man_id;
     }

@@ -2,6 +2,7 @@ package com.revature.reimbursement.service;
 
 import com.revature.reimbursement.dao.ManagerDAO;
 import com.revature.reimbursement.dao.ManagerDAOImpl;
+import com.revature.reimbursement.models.Employees;
 import com.revature.reimbursement.models.Managers;
 
 import java.util.Scanner;
@@ -29,6 +30,15 @@ public class ManagerService {
         return null;
     }
 
+    public Managers login(String username, String password) {
+        Managers manager = md.managerLogin(username);
+        if (password.equals(manager.getPassword())) {
+            return manager;
+        } else {
+            return null;
+        }
+    }
+
     public Managers register() {
         System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
         System.out.println("Let's get you an account!");
@@ -52,4 +62,5 @@ public class ManagerService {
         }
         return null;
     }
+
 }

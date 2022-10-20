@@ -5,6 +5,8 @@ import com.revature.reimbursement.dao.EmployeeDAOImpl;
 import com.revature.reimbursement.dao.UserAuthorizationDAO;
 import com.revature.reimbursement.dao.UserAuthorizationDAOImpl;
 import com.revature.reimbursement.models.Employees;
+import org.postgresql.util.PSQLException;
+
 import java.util.Scanner;
 
 public class EmployeeService {
@@ -70,8 +72,15 @@ public class EmployeeService {
         return null;
     }
 
-//    public Employees register(Employees employee, double amount, String description ) {
-//
-//    }
+    public Employees register(String fName, String lName, String email, String username, String password, String department) {
+
+        Employees newEmployee = ed.registerEmployee(fName, lName, email, username, password, department);
+        if(newEmployee.getEmploy_id() != 0) {
+            System.out.println("user names matched in db");
+            return newEmployee;
+        } else {
+            return null;
+        }
+    }
 
 }

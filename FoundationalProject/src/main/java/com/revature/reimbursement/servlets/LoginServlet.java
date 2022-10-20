@@ -28,6 +28,7 @@ public class LoginServlet extends HttpServlet {
         System.out.println("[LOG] - LoginServlet Instantiated");
     }
 
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if(req.getParameter("type").equals("employee")) {

@@ -58,15 +58,16 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
             ResultSet rs;
             if((rs = prepState.executeQuery()) != null) {
-                rs.next();
-                String receivedFirstName = rs.getString("first");
-                String receivedLastName = rs.getString("last");
-                String receivedEmail = rs.getString("email");
-                String receivedUsername = rs.getString("username");
-                String receivedPassword = rs.getString("pw");
-                String receivedDepartment = rs.getString("department");
+                if (rs.next()) {
+                    String receivedFirstName = rs.getString("first");
+                    String receivedLastName = rs.getString("last");
+                    String receivedEmail = rs.getString("email");
+                    String receivedUsername = rs.getString("username");
+                    String receivedPassword = rs.getString("pw");
+                    String receivedDepartment = rs.getString("department");
 
-                employee = new Employees( receivedFirstName, receivedLastName, receivedEmail, receivedUsername, receivedPassword, receivedDepartment);
+                    employee = new Employees(receivedFirstName, receivedLastName, receivedEmail, receivedUsername, receivedPassword, receivedDepartment);
+                }
             }
         } catch (SQLException e) {
             System.out.println("Sorry, we are unable to register your user at this time...");

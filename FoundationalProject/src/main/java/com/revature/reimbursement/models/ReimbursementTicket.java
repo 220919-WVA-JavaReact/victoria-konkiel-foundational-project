@@ -32,6 +32,9 @@ public class ReimbursementTicket {
     public ReimbursementTicket() {
     }
 
+    public ReimbursementTicket(int receivedEmployee, double receivedAmount, String receivedDescription, String receivedStatus) {
+    }
+
     public Employees getEmploy_id() {
         return employee;
     }

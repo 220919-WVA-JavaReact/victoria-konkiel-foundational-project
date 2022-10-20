@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class ReimbursementServlet extends HttpServlet {
     ReimbursementTicketService rts = new ReimbursementTicketService();
@@ -42,16 +43,13 @@ public class ReimbursementServlet extends HttpServlet {
             resp.getWriter().write(mapper.writeValueAsString(errorMessage));
             return;
         } else {
-            HttpSession sess = req.getSession();
-            Employees loggedIn = (Employees) sess.getAttribute("employee-logged-in");
-            ReimbursementTicketService rts = new ReimbursementTicketService();
-            ArrayList<ReimbursementTicket> currentPendingTickets = rts.getPendingTickets(loggedIn);
+            List<ReimbursementTicket> currentPendingTickets = rts.getPendingTickets();
             System.out.println(currentPendingTickets);
 
-            if(currentPendingTickets != null) {
+//            if(currentPendingTickets != null) {
                 resp.setStatus(200);
                 resp.getWriter().write(mapper.writeValueAsString(currentPendingTickets));
-            }
+//            }
         }
     }
 

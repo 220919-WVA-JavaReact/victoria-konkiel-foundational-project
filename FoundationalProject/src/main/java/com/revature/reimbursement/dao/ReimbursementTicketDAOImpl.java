@@ -43,15 +43,16 @@ public class ReimbursementTicketDAOImpl implements ReimbursementTicketDAO {
     }
 
     @Override
-    public ArrayList<ReimbursementTicket> getPendingTickets(Employees employee) {
-        ArrayList<ReimbursementTicket> currentPendingTickets = new ArrayList<>();
+    public List<ReimbursementTicket> getPendingTickets() {
+        List<ReimbursementTicket> currentPendingTickets = new ArrayList<>();
         try(Connection conn = ConnectionUtil.getConnection()) {
-            String sql = "select * from rem_ticket where status = pending";
+            String sql = "select * from rem_ticket where status = ?";
             PreparedStatement prepState = conn.prepareStatement(sql);
+            prepState.setString(1, "pending");
             ResultSet rs;
             if((rs = prepState.executeQuery()) != null) {
                 while (rs.next()) {
-                    Employees receivedEmployee = (Employees) rs.getObject("employee_id");
+                    int receivedEmployee = rs.getInt("employee_id");
                     double receivedAmount = rs.getDouble("amount");
                     String receivedDescription = rs.getString("description");
                     String receivedStatus = rs.getString("status");

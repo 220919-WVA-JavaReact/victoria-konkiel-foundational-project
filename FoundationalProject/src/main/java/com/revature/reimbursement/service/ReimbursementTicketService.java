@@ -7,6 +7,7 @@ import com.revature.reimbursement.models.ReimbursementTicket;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ReimbursementTicketService {
@@ -42,8 +43,11 @@ public class ReimbursementTicketService {
         }
     }
 
-    public ArrayList<ReimbursementTicket> getPendingTickets(Employees employee) {
-        ArrayList<ReimbursementTicket> currentPendingTickets = rtd.getPendingTickets(employee);
-        return currentPendingTickets;
+    public List<ReimbursementTicket> getPendingTickets() {
+//        List<ReimbursementTicket> currentPendingTickets = rtd.getPendingTickets();
+//        for(ReimbursementTicket rt : currentPendingTickets){
+//
+//        }
+        return rtd.getPendingTickets();
     }
 }

@@ -1,10 +1,8 @@
 package com.revature.reimbursement.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.reimbursement.dao.ReimbursementTicketDAOImpl;
 import com.revature.reimbursement.models.Employees;
 import com.revature.reimbursement.models.ReimbursementTicket;
-import com.revature.reimbursement.service.EmployeeService;
 import com.revature.reimbursement.service.ReimbursementTicketService;
 
 import javax.servlet.ServletException;
@@ -17,6 +15,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 
 public class ReimbursementServlet extends HttpServlet {
+    ReimbursementTicketService rts = new ReimbursementTicketService();
     private final ObjectMapper mapper;
     public ReimbursementServlet(ObjectMapper mapper) {
         this.mapper = mapper;
@@ -46,10 +45,24 @@ public class ReimbursementServlet extends HttpServlet {
                 ReimbursementTicket reimbursementTicket = mapper.readValue(req.getInputStream(), ReimbursementTicket.class);
                 String description = reimbursementTicket.getDescription();
                 double amount = reimbursementTicket.getAmount();
-                Employees loggedIn = (Employees) session.getAttribute("type");
+                HttpSession sess = req.getSession();
+                Employees loggedIn = (Employees) sess.getAttribute("employee-logged-in");
+                System.out.println(loggedIn);
 
-
-
+                ReimbursementTicket rt = rts.createTicket(loggedIn, amount, description);
+                if(rt != null) {
+                    if(rt.getAmount() == 0) {
+                        resp.getWriter().write("You must enter an amount.");
+                    } else if(rt.getDescription().equals("")) {
+                        resp.getWriter().write("You must have a description.");
+                    } else {
+                        resp.setStatus(201);
+                        resp.getWriter().write(String.valueOf(rt));
+                    }
+                } else {
+                    resp.setStatus(400);
+                    resp.getWriter().write("Something went wrong, you're ticket couldn't be created.");
+                }
             }
         }
     }

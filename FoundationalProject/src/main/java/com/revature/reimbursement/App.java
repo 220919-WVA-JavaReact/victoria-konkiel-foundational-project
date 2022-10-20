@@ -43,7 +43,7 @@ public class App {
 
                         switch (ticketResponse) {
                             case "create" :
-                                rts.createTicket(loggedIn);
+                                //rts.createTicket(loggedIn);
                                 loggedIn = null;
                                 break;
                             case "back" :

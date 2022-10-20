@@ -30,14 +30,12 @@ public class ReimbursementTicketService {
 //        }
 //    }
 
-    public String createTicket(Employees employee, double amount, String description) {
-        if (amount <= 0 ) {
-            return "The amount cannot be left blank.";
-        } else if(description.equals("")) {
-            return "The description cannot be left blank.";
-        } else {
-            ReimbursementTicket rt = rtd.createTicket(employee, amount, description);
-            return "Your reimbursement ticket was successfully created!";
+    public ReimbursementTicket createTicket(Employees employee, double amount, String description) {
+        ReimbursementTicket rt = rtd.createTicket(employee, amount, description);
+        if (rt != null ) {
+            return rt;
+        }else {
+            return null;
         }
     }
 }

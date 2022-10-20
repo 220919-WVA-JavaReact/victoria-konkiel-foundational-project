@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ReimbursementServlet extends HttpServlet {
@@ -24,6 +25,34 @@ public class ReimbursementServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         System.out.println("[LOG] - ReimbursementServlet Instantiated");
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession(false);
+        if(session == null) {
+            resp.setStatus(400);
+            resp.setContentType("application/json");
+
+            HashMap<String, Object> errorMessage = new HashMap<>();
+            errorMessage.put("Status code", 400);
+            errorMessage.put("Message", "You must be logged in to access reimbursement site.");
+            errorMessage.put("Timestamp", LocalDateTime.now().toString());
+
+            resp.getWriter().write(mapper.writeValueAsString(errorMessage));
+            return;
+        } else {
+            HttpSession sess = req.getSession();
+            Employees loggedIn = (Employees) sess.getAttribute("employee-logged-in");
+            ReimbursementTicketService rts = new ReimbursementTicketService();
+            ArrayList<ReimbursementTicket> currentPendingTickets = rts.getPendingTickets(loggedIn);
+            System.out.println(currentPendingTickets);
+
+            if(currentPendingTickets != null) {
+                resp.setStatus(200);
+                resp.getWriter().write(mapper.writeValueAsString(currentPendingTickets));
+            }
+        }
     }
 
     @Override

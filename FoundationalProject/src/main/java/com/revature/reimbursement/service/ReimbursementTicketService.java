@@ -4,6 +4,9 @@ import com.revature.reimbursement.dao.ReimbursementTicketDAO;
 import com.revature.reimbursement.dao.ReimbursementTicketDAOImpl;
 import com.revature.reimbursement.models.Employees;
 import com.revature.reimbursement.models.ReimbursementTicket;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ReimbursementTicketService {
@@ -37,5 +40,10 @@ public class ReimbursementTicketService {
         }else {
             return null;
         }
+    }
+
+    public ArrayList<ReimbursementTicket> getPendingTickets(Employees employee) {
+        ArrayList<ReimbursementTicket> currentPendingTickets = rtd.getPendingTickets(employee);
+        return currentPendingTickets;
     }
 }

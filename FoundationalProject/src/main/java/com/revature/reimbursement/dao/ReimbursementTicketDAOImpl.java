@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReimbursementTicketDAOImpl implements ReimbursementTicketDAO {
 
@@ -39,4 +41,36 @@ public class ReimbursementTicketDAOImpl implements ReimbursementTicketDAO {
         }
         return null;
     }
+
+    @Override
+    public ArrayList<ReimbursementTicket> getPendingTickets(Employees employee) {
+        ArrayList<ReimbursementTicket> currentPendingTickets = new ArrayList<>();
+        try(Connection conn = ConnectionUtil.getConnection()) {
+            String sql = "select * from rem_ticket where status = pending";
+            PreparedStatement prepState = conn.prepareStatement(sql);
+            ResultSet rs;
+            if((rs = prepState.executeQuery()) != null) {
+                while (rs.next()) {
+                    Employees receivedEmployee = (Employees) rs.getObject("employee_id");
+                    double receivedAmount = rs.getDouble("amount");
+                    String receivedDescription = rs.getString("description");
+                    String receivedStatus = rs.getString("status");
+
+                    ReimbursementTicket ticket = new ReimbursementTicket(receivedEmployee, receivedAmount, receivedDescription, receivedStatus);
+                    currentPendingTickets.add(ticket);
+                }
+            }
+        } catch(SQLException e) {
+            System.out.println("Database error printing pending tickets");
+            e.printStackTrace();
+        }
+        return currentPendingTickets;
+    }
+
+    @Override
+    public List<ReimbursementTicket> getAllTickets() {
+        return null;
+    }
+
+
 }

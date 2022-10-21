@@ -51,4 +51,8 @@ public class ReimbursementTicketService {
     public ReimbursementTicket updateTicketStatus(Managers manager, int ticket_id, String status){
         return rtd.updateTicketStatus(manager, ticket_id, status);
     }
+
+    public List<ReimbursementTicket> getPreviousTickets(Employees employee) {
+        return rtd.getPreviousTickets(employee);
+    }
 }

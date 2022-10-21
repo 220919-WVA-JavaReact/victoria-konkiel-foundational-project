@@ -1,11 +1,14 @@
 package com.revature.reimbursement.dao;
 
 import com.revature.reimbursement.models.Managers;
+import com.revature.reimbursement.models.ReimbursementTicket;
 import com.revature.reimbursement.util.ConnectionUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ManagerDAOImpl implements ManagerDAO {
     @Override
@@ -72,4 +75,5 @@ public class ManagerDAOImpl implements ManagerDAO {
         }
         return manager;
     }
+
 }

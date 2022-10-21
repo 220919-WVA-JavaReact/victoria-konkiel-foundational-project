@@ -13,4 +13,6 @@ public interface ReimbursementTicketDAO {
     List<ReimbursementTicket> getPendingTickets();
 
     ReimbursementTicket updateTicketStatus(Managers manager, int ticket_id, String status);
+
+    List<ReimbursementTicket> getPreviousTickets(Employees employee);
 }

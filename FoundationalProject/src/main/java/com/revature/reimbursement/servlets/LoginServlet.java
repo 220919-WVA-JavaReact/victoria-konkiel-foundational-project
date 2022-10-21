@@ -66,7 +66,7 @@ public class LoginServlet extends HttpServlet {
             } else {
                 resp.getWriter().write(payload);
                 HttpSession session = req.getSession();
-                session.setAttribute("manager-logged-in", manager);
+                session.setAttribute("employee-logged-in", manager);
             }
         }
     }

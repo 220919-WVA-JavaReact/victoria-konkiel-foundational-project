@@ -41,6 +41,8 @@ public class RegistrationServlet extends HttpServlet {
             } else {
                 resp.setStatus(201);
                 resp.getWriter().write(payload);
+                HttpSession session = req.getSession();
+                session.setAttribute("employee-logged-in", newEmployee);
             }
         }
     }

@@ -115,34 +115,37 @@ public class ReimbursementServlet extends HttpServlet {
             resp.setContentType("application/json");
             HttpSession session = req.getSession(false);
             if (session != null) {
-                Managers manager = (Managers) session.getAttribute("auth-users");
-                ReimbursementTicket rt = mapper.readValue(req.getInputStream(), ReimbursementTicket.class);
-                if (req.getParameter("action").equals("approve")) {
-                    if (rt.getStatus().equals("pending")) {
-                        String payload = mapper.writeValueAsString(rt);
-                        String output = String.valueOf(rts.updateTicketStatus(manager, rt.getTicket_id(), "approved"));
-                        resp.getWriter().write("Awesome, you approved the ticket.");
-                        resp.setStatus(200);
-                    } else {
-                        resp.setStatus(401);
-                        resp.getWriter().write("This ticket has already been approved.");
+                if(session.getAttribute("employee-logged-in").getClass().equals(Managers.class)) {
+                    Managers manager = (Managers) session.getAttribute("employee-logged-in");
+                    ReimbursementTicket rt = mapper.readValue(req.getInputStream(), ReimbursementTicket.class);
+                    if (req.getParameter("action").equals("approve")) {
+                        if (rt.getStatus().equals("pending")) {
+                            String payload = mapper.writeValueAsString(rt);
+                            String output = String.valueOf(rts.updateTicketStatus(manager, rt.getTicket_id(), "approved"));
+                            resp.getWriter().write("Awesome, you approved the ticket.");
+                            resp.setStatus(200);
+                        } else {
+                            resp.setStatus(401);
+                            resp.getWriter().write("This ticket has already been approved.");
+                        }
+                    } else if (req.getParameter("action").equals("deny")) {
+                        if (rt.getStatus().equals("pending")) {
+                            String payload = mapper.writeValueAsString(rt);
+                            String output = String.valueOf(rts.updateTicketStatus(manager, rt.getTicket_id(), "denied"));
+                            resp.getWriter().write("Awesome, you denied the ticket.");
+                            resp.setStatus(200);
+                        } else {
+                            resp.setStatus(401);
+                            resp.getWriter().write("This ticket has already been approved silly.");
+                        }
                     }
-                } else if (req.getParameter("action").equals("deny")) {
-                    if (rt.getStatus().equals("pending")) {
-                        String payload = mapper.writeValueAsString(rt);
-                        String output = String.valueOf(rts.updateTicketStatus(manager, rt.getTicket_id(), "denied"));
-                        resp.getWriter().write("Awesome, you denied the ticket.");
-                        resp.setStatus(200);
-                    } else {
-                        resp.setStatus(401);
-                        resp.getWriter().write("This ticket has already been approved silly.");
-                    }
+                } else {
+                    resp.setStatus(403);
+                    resp.getWriter().write("Employees are not authorized to approve tickets.");
                 }
             } else {
-                if (req.getParameter("type").equals("employee")) {
-                    resp.setStatus(403);
-                    resp.getWriter().write("Employees are not authorized to update tickets.");
-                }
+                resp.setStatus(401);
+                resp.getWriter().write("Please log in.");
             }
         }
     }

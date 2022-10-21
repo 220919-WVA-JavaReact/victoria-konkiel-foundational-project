@@ -2,14 +2,21 @@ package com.revature.reimbursement.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.reimbursement.models.Employees;
+import com.revature.reimbursement.models.ReimbursementTicket;
+import com.revature.reimbursement.service.ReimbursementTicketService;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.List;
 
 public class EmployeeServlet extends HttpServlet {
+    ReimbursementTicketService rts = new ReimbursementTicketService();
     private final ObjectMapper mapper;
 
     public EmployeeServlet(ObjectMapper mapper) {
@@ -26,13 +33,28 @@ public class EmployeeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("[LOG] - EmployeeServlet received a GET request at " + LocalDateTime.now());
-        Employees newEmployee = new Employees("Ron", "Swanson", "ronswan@pnr.com", "ronswan1", "pass1234", "Parks and Recreation");
-        String respPayload = mapper.writeValueAsString(newEmployee);
+        HttpSession session = req.getSession(false);
+        if(session == null) {
+            resp.setStatus(400);
+            resp.setContentType("application/json");
 
-        resp.setStatus(200);
-        resp.setContentType("application/json");
-        resp.getWriter().write(respPayload);
+            HashMap<String, Object> errorMessage = new HashMap<>();
+            errorMessage.put("Status code", 400);
+            errorMessage.put("Message", "You must be logged in to access reimbursement site.");
+            errorMessage.put("Timestamp", LocalDateTime.now().toString());
+
+            resp.getWriter().write(mapper.writeValueAsString(errorMessage));
+            return;
+        } else {
+            Employees loggedIn = (Employees) session.getAttribute("employee-logged-in");
+            List<ReimbursementTicket> previousTickets = rts.getPreviousTickets(loggedIn);
+            System.out.println(previousTickets);
+
+//            if(currentPendingTickets != null) {
+            resp.setStatus(200);
+            resp.getWriter().write(mapper.writeValueAsString(previousTickets));
+//            }
+        }
     }
 
     @Override

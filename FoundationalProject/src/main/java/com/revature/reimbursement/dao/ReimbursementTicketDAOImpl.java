@@ -43,6 +43,7 @@ public class ReimbursementTicketDAOImpl implements ReimbursementTicketDAO {
         return null;
     }
 
+
     @Override
     public List<ReimbursementTicket> getPendingTickets() {
         List<ReimbursementTicket> currentPendingTickets = new ArrayList<>();
@@ -97,6 +98,32 @@ public class ReimbursementTicketDAOImpl implements ReimbursementTicketDAO {
         return rt;
     }
 
+    @Override
+    public List<ReimbursementTicket> getPreviousTickets(Employees employee) {
+        List<ReimbursementTicket> previousTickets = new ArrayList<>();
+        try(Connection conn = ConnectionUtil.getConnection()) {
+            String sql = "select * from rem_ticket where employee_id = ?";
+            PreparedStatement prepState = conn.prepareStatement(sql);
+            prepState.setInt(1, employee.getEmploy_id());
+            ResultSet rs;
+            if((rs = prepState.executeQuery()) != null) {
+                while (rs.next()) {
+                    int receivedTicketId = rs.getInt("ticket_id");
+                    int receivedEmployee = rs.getInt("employee_id");
+                    double receivedAmount = rs.getDouble("amount");
+                    String receivedDescription = rs.getString("description");
+                    String receivedStatus = rs.getString("status");
+
+                    ReimbursementTicket ticket = new ReimbursementTicket(receivedTicketId, receivedEmployee, receivedAmount, receivedDescription, receivedStatus);
+                    previousTickets.add(ticket);
+                }
+            }
+        } catch(SQLException e) {
+            System.out.println("Database error printing tickets");
+            e.printStackTrace();
+        }
+        return previousTickets;
+    }
 
 
 }

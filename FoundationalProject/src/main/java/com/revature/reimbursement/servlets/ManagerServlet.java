@@ -39,12 +39,7 @@ public class ManagerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(req.getParameter("type").equals("employee")) {
-            resp.setStatus(403);
-            resp.getWriter().write("Employees are not authorized to update tickets.");
-        } else {
 
-        }
     }
 
     @Override

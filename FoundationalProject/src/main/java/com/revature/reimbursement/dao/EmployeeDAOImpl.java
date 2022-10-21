@@ -59,6 +59,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             ResultSet rs;
             if((rs = prepState.executeQuery()) != null) {
                 if (rs.next()) {
+                    int receivedId = rs.getInt("employee_id");
                     String receivedFirstName = rs.getString("first");
                     String receivedLastName = rs.getString("last");
                     String receivedEmail = rs.getString("email");
@@ -66,7 +67,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
                     String receivedPassword = rs.getString("pw");
                     String receivedDepartment = rs.getString("department");
 
-                    employee = new Employees(receivedFirstName, receivedLastName, receivedEmail, receivedUsername, receivedPassword, receivedDepartment);
+                    employee = new Employees(receivedId, receivedFirstName, receivedLastName, receivedEmail, receivedUsername, receivedPassword, receivedDepartment);
                 }
             }
         } catch (SQLException e) {

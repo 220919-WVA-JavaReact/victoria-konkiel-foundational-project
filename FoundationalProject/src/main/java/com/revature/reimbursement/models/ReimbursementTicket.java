@@ -49,6 +49,18 @@ public class ReimbursementTicket {
         this.status = status;
     }
 
+    public int getTicket_id() {
+        return ticket_id;
+    }
+
+    public void setTicket_id(int ticket_id) {
+        this.ticket_id = ticket_id;
+    }
+
+    public int getEmployee_id() {
+        return employee_id;
+    }
+
     public Employees getEmploy_id() {
         return employee;
     }

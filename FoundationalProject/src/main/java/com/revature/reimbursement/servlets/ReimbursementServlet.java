@@ -95,11 +95,14 @@ public class ReimbursementServlet extends HttpServlet {
                     if (rt != null) {
                         if (rt.getAmount() == 0) {
                             resp.getWriter().write("You must enter an amount.");
+                            return;
                         } else if (rt.getDescription().equals("")) {
                             resp.getWriter().write("You must have a description.");
+                            return;
                         } else {
                             resp.setStatus(201);
                             resp.getWriter().write(String.valueOf(rt));
+                            return;
                         }
                     } else {
                         resp.setStatus(400);

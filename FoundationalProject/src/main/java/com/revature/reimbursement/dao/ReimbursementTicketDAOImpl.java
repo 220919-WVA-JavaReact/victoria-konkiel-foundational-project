@@ -1,6 +1,7 @@
 package com.revature.reimbursement.dao;
 
 import com.revature.reimbursement.models.Employees;
+import com.revature.reimbursement.models.Managers;
 import com.revature.reimbursement.models.ReimbursementTicket;
 import com.revature.reimbursement.util.ConnectionUtil;
 import java.sql.Connection;
@@ -52,12 +53,13 @@ public class ReimbursementTicketDAOImpl implements ReimbursementTicketDAO {
             ResultSet rs;
             if((rs = prepState.executeQuery()) != null) {
                 while (rs.next()) {
+                    int receivedTicketId = rs.getInt("ticket_id");
                     int receivedEmployee = rs.getInt("employee_id");
                     double receivedAmount = rs.getDouble("amount");
                     String receivedDescription = rs.getString("description");
                     String receivedStatus = rs.getString("status");
 
-                    ReimbursementTicket ticket = new ReimbursementTicket(receivedEmployee, receivedAmount, receivedDescription, receivedStatus);
+                    ReimbursementTicket ticket = new ReimbursementTicket(receivedTicketId, receivedEmployee, receivedAmount, receivedDescription, receivedStatus);
                     currentPendingTickets.add(ticket);
                 }
             }
@@ -69,9 +71,32 @@ public class ReimbursementTicketDAOImpl implements ReimbursementTicketDAO {
     }
 
     @Override
-    public List<ReimbursementTicket> getAllTickets() {
-        return null;
+    public ReimbursementTicket updateTicketStatus(Managers manager, int ticket_id, String status) {
+        ReimbursementTicket rt = new ReimbursementTicket();
+        try(Connection conn = ConnectionUtil.getConnection()) {
+            String sql = "update rem_ticket set status = ? where ticket_id = ? RETURNING *";
+            PreparedStatement prepState = conn.prepareStatement(sql);
+            prepState.setString(1, status);
+            prepState.setInt(2, ticket_id);
+            ResultSet rs;
+            if((rs = prepState.executeQuery()) != null) {
+                while(rs.next()) {
+                    int receivedTickId = rs.getInt("ticket_id");
+                    int receivedEmployId = rs.getInt("employee_id");
+                    double receivedAmount = rs.getDouble("amount");
+                    String receivedDescription = rs.getString("description");
+                    String receivedStatus = rs.getString("status");
+
+                    rt = new ReimbursementTicket(receivedTickId, receivedEmployId, receivedAmount, receivedDescription, receivedStatus);
+
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rt;
     }
+
 
 
 }

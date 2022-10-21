@@ -3,11 +3,20 @@ package com.revature.reimbursement.models;
 import java.util.Objects;
 
 public class ReimbursementTicket {
+    private int ticket_id;
     private int employee_id;
     private Employees employee;
     private double amount;
     private String description;
     private String status;
+
+    public ReimbursementTicket(int ticket_id, int employee_id, double amount, String description, String status) {
+        this.ticket_id = ticket_id;
+        this.employee_id = employee_id;
+        this.amount = amount;
+        this.description = description;
+        this.status = status;
+    }
 
     public ReimbursementTicket(Employees employee, double amount, String description) {
         this.employee = employee;
@@ -72,10 +81,26 @@ public class ReimbursementTicket {
         this.status = status;
     }
 
+
+
+    public void setEmployee_id(int employee_id) {
+        this.employee_id = employee_id;
+    }
+
+    public Employees getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employees employee) {
+        this.employee = employee;
+    }
+
     @Override
     public String toString() {
         return "ReimbursementTicket{" +
-                "employee=" + employee +
+                "ticket_id=" + ticket_id +
+                ", employee_id=" + employee_id +
+                ", employee=" + employee +
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
                 ", status='" + status + '\'' +
@@ -83,15 +108,12 @@ public class ReimbursementTicket {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ReimbursementTicket that = (ReimbursementTicket) o;
-        return employee == that.employee && Double.compare(that.amount, amount) == 0 && description.equals(that.description) && status.equals(that.status);
+    public int hashCode() {
+        return super.hashCode();
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(employee, amount, description, status);
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 }

@@ -2,6 +2,9 @@ package com.revature.reimbursement.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.reimbursement.models.Managers;
+import com.revature.reimbursement.models.ReimbursementTicket;
+import com.revature.reimbursement.service.ReimbursementTicketService;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +22,8 @@ import java.time.LocalDateTime;
 //                @WebInitParam(name = "another-param", value = "another-value")
 //        })
 public class ManagerServlet extends HttpServlet {
+    ReimbursementTicket rt = new ReimbursementTicket();
+    ReimbursementTicketService rts = new ReimbursementTicketService();
     private final ObjectMapper mapper;
     public ManagerServlet(ObjectMapper mapper) {
         this.mapper = mapper;
@@ -34,13 +39,12 @@ public class ManagerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("[LOG] - ManagerServlet received a GET request at " + LocalDateTime.now());
-        Managers newManager = new Managers("Ben", "Wyatt", "bwyatt@pnr.com", "bwyatt", "Password156", "Parks and Recreation");
-        String respPayload = mapper.writeValueAsString(newManager);
+        if(req.getParameter("type").equals("employee")) {
+            resp.setStatus(403);
+            resp.getWriter().write("Employees are not authorized to update tickets.");
+        } else {
 
-        resp.setStatus(200);
-        resp.setContentType("application/json");
-        resp.getWriter().write(respPayload);
+        }
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.revature.reimbursement.service;
 import com.revature.reimbursement.dao.ReimbursementTicketDAO;
 import com.revature.reimbursement.dao.ReimbursementTicketDAOImpl;
 import com.revature.reimbursement.models.Employees;
+import com.revature.reimbursement.models.Managers;
 import com.revature.reimbursement.models.ReimbursementTicket;
 
 import java.lang.reflect.Array;
@@ -44,10 +45,10 @@ public class ReimbursementTicketService {
     }
 
     public List<ReimbursementTicket> getPendingTickets() {
-//        List<ReimbursementTicket> currentPendingTickets = rtd.getPendingTickets();
-//        for(ReimbursementTicket rt : currentPendingTickets){
-//
-//        }
         return rtd.getPendingTickets();
+    }
+
+    public ReimbursementTicket updateTicketStatus(Managers manager, int ticket_id, String status){
+        return rtd.updateTicketStatus(manager, ticket_id, status);
     }
 }
